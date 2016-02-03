@@ -1,0 +1,32 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta charset="utf-8" />
+</head>
+<body>
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+            </tr>
+        </thead>
+        <tbody>
+            @Each.Data
+            <tr>
+                <td>@Current.Id</td>
+                <td>@Current.Name</td>
+            </tr>
+            @EndEach
+        </tbody>
+        <tfoot>
+            <tr>
+                <th>
+                    Page @Model.PageNumber of @Model.TotalPages (@Model.TotalResults records.)
+                </th>
+            </tr>
+        </tfoot>
+    </table>
+</body>
+</html>
