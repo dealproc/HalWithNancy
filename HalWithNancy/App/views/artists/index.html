@@ -2,7 +2,7 @@
 <table class="table table-condensed" data-bind="with: grid">
     <thead>
         <tr data-bind="foreach: columns">
-            <th data-bind="text: header, attr: { class: css }"></th>
+            <th data-bind="attr:{ class: css }"><i data-bind="css: sortIcon, visible: canSort"></i> <a data-bind="text: header, click: function() { $parent.setSort($data); }, clickBubble: false"></a></th>
         </tr>
     </thead>
     <tbody data-bind="foreach: { data: data, as: 'row' }">

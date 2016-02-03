@@ -52,12 +52,36 @@
             getColumnText: function ($colInfo, $row) {
                 return $row[$colInfo.property];
             },
+            setSort: function (col) {
+                var state = ko.utils.unwrapObservable(col.sort);
+                if (state === undefined) {
+                    col.sort(true);
+                } else if (state) {
+                    col.sort(false);
+                } else {
+                    col.sort(undefined);
+                }
+
+                artistService.getPage(1, ko.utils.unwrapObservable(_this.grid.pageSize)).done(_this.grid.bindPage);
+            },
             columns: [
-                { header: '', property: 'hi', controls: 'buttons', css: 'col-sm-2 col-md-1' },
-                { header: 'Artist Name', property: 'name', css: 'col-sm-10 col-md-11' }
+                { header: '', property: 'hi', controls: 'buttons', css: 'col-sm-2 col-md-1', sort: ko.observable(undefined), canSort: false },
+                { header: 'Artist Name', property: 'name', css: 'col-sm-10 col-md-11', sort: ko.observable(undefined), canSort: true }
             ]
         };
 
+        for (var i = 0; i < _this.grid.columns.length; i++) {
+            var col = _this.grid.columns[i];
+            col.sortIcon = ko.pureComputed(function () {
+                var state = ko.utils.unwrapObservable(this.sort);
+                if (state === undefined) {
+                    return "fa fa-fw fa-sort text-muted";
+                } else if (state) {
+                    return "fa fa-fw fa-sort-amount-asc";
+                }
+                return "fa fa-fw fa-sort-amount-desc";
+            }, col);
+        }
     };
     return ctor;
 });

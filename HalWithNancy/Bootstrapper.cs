@@ -7,9 +7,6 @@ using Nancy.TinyIoc;
 
 namespace HalWithNancy {
 	public class Bootstrapper : DefaultNancyBootstrapper {
-		public Bootstrapper() {
-			var x = 0;
-		}
 		protected override void ConfigureConventions(NancyConventions conventions) {
 			base.ConfigureConventions(conventions);
 

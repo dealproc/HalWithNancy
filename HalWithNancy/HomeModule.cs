@@ -4,8 +4,8 @@ using Nancy.ModelBinding;
 
 namespace HalWithNancy {
 	public class HomeModule : NancyModule {
-		public static Link GetArtists = new Link("self", "/artists/{id}");
-		public static Link GetArtistsPaged = new Link("artists", "/artists/{?query,page,pageSize}");
+		public static Link GetArtists = new Link("self", "/artists/{id}", "Edit");
+		public static Link GetArtistsPaged = new Link("artists", "/artists/{?query,page,pageSize}", "List");
 
 		public HomeModule(Services.IArtistService artistService) : base("/") {
 			Get["/"] = _ => {

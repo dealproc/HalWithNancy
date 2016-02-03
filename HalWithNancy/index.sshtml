@@ -4,8 +4,9 @@
     <title>Hi</title>
     <meta name="viewport" content="width=device-width" charset="utf-8" />
 
-    <link href="Content/bootstrap.min.css" rel="stylesheet" />
-    <link href="Content/bootstrap-theme.min.css" rel="stylesheet" />
+    <link href="/Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="/Content/bootstrap-theme.min.css" rel="stylesheet" />
+    <link href="/Content/font-awesome.min.css" rel="stylesheet" />
     <link href="/Content/durandal.css" rel="stylesheet" />
 </head>
 <body>
