@@ -1,0 +1,47 @@
+﻿<h2>Artists</h2>
+<table class="table table-condensed" data-bind="with: grid">
+    <thead>
+        <tr data-bind="foreach: columns">
+            <th data-bind="text: header, attr: { class: css }"></th>
+        </tr>
+    </thead>
+    <tbody data-bind="foreach: { data: data, as: 'row' }">
+        <tr data-bind="foreach: $parent.columns">
+            <!-- ko template: { name: $parents[1].colType, data: { col: $data, row: row} } --><!-- /ko -->
+        </tr>
+    </tbody>
+    <tfoot>
+        <tr>
+            <td data-bind="attr: {colspan: columns.length}">
+                <div class="btn-group" data-bind="foreach: pager">
+                    <button type="button" class="btn btn-sm btn-default" data-bind="text: title, enable: enabled, click: function(){ $parent.loadPage($data); }"></button>
+                </div>
+                <div class="pull-right">
+                    Page
+                    <span data-bind="text: pageNumber"></span>
+                    of
+                    <span data-bind="text: totalPages"></span>
+                    (Total Records: <span data-bind="text: totalRecords"></span>)
+                </div>
+            </td>
+        </tr>
+    </tfoot>
+</table>
+
+<script type="text/html" id="text">
+    <td data-bind="text: $data.row[$data.col.property]"></td>
+</script>
+<script type="text/html" id="buttons">
+    <td>
+        <div class="btn-group btn-group-sm">
+            <a class="btn btn-default" data-bind="attr: { href: '#' + $data.row._links.self.href }">Edit</a>
+            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <span class="caret"></span>
+                <span class="sr-only">Toggle Dropdown</span>
+            </button>
+            <ul class="dropdown-menu" data-bind="foreachprop: $data.row._links">
+                <li><a data-bind="attr: { href: '#' + value.href }, text: value.href"></a></li>
+            </ul>
+        </div>
+    </td>
+</script>

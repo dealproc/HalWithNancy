@@ -53,9 +53,65 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App\main.js" />
+    <Content Include="App\services\artistService.js" />
+    <Content Include="App\shell.html" />
+    <Content Include="App\shell.js" />
+    <Content Include="App\viewmodels\artists\dashboard.js" />
+    <Content Include="App\viewmodels\artists\index.js" />
+    <Content Include="App\views\artists\dashboard.html" />
+    <Content Include="App\views\artists\index.html" />
+    <Content Include="App\widgets\grid\view.html" />
+    <Content Include="App\widgets\grid\viewmodel.js" />
+    <Content Include="Content\bootstrap-theme.css" />
+    <Content Include="Content\bootstrap-theme.min.css" />
+    <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\durandal.css" />
+    <Content Include="Content\images\avatar.jpg" />
+    <Content Include="Content\images\icon.png" />
+    <Content Include="Content\images\ios-startup-image-landscape.png" />
+    <Content Include="Content\images\ios-startup-image-portrait.png" />
+    <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Scripts\almond-custom.js" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\durandal\activator.js" />
+    <Content Include="Scripts\durandal\app.js" />
+    <Content Include="Scripts\durandal\binder.js" />
+    <Content Include="Scripts\durandal\composition.js" />
+    <Content Include="Scripts\durandal\events.js" />
+    <Content Include="Scripts\durandal\plugins\dialog.js" />
+    <Content Include="Scripts\durandal\plugins\history.js" />
+    <Content Include="Scripts\durandal\plugins\http.js" />
+    <Content Include="Scripts\durandal\plugins\observable.js" />
+    <Content Include="Scripts\durandal\plugins\router.js" />
+    <Content Include="Scripts\durandal\plugins\serializer.js" />
+    <Content Include="Scripts\durandal\plugins\widget.js" />
+    <Content Include="Scripts\durandal\system.js" />
+    <Content Include="Scripts\durandal\transitions\entrance.js" />
+    <Content Include="Scripts\durandal\viewEngine.js" />
+    <Content Include="Scripts\durandal\viewLocator.js" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Content\bootstrap.min.css.map" />
+    <Content Include="Content\bootstrap.css.map" />
+    <Content Include="Content\bootstrap-theme.min.css.map" />
+    <Content Include="Content\bootstrap-theme.css.map" />
+    <None Include="Scripts\jquery-2.2.0.intellisense.js" />
+    <Content Include="Scripts\jquery-2.2.0.js" />
+    <Content Include="Scripts\jquery-2.2.0.min.js" />
+    <Content Include="Scripts\knockout-3.4.0.debug.js" />
+    <Content Include="Scripts\knockout-3.4.0.js" />
+    <Content Include="Scripts\r.js" />
+    <Content Include="Scripts\require.js" />
+    <Content Include="Scripts\text.js" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Bootstrapper.cs" />
     <Compile Include="DataModels\Entities.cs" />
     <Compile Include="HomeModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -64,6 +120,7 @@
     <Compile Include="Repositories\Page.of.T.cs" />
     <Compile Include="Repositories\SqliteRepositories\ArtistRepository.cs" />
     <Compile Include="Services\Artists\ArtistPagedCriteria.cs" />
+    <Compile Include="Services\Artists\ArtistPmo.cs" />
     <Compile Include="Services\Artists\ArtistService.cs" />
     <Compile Include="Services\IArtistService.cs" />
     <Compile Include="Services\Shared\PagedCriteria.of.T.cs" />
@@ -75,6 +132,7 @@
     <Content Include="App_Data\Chinook_Sqlite.sqlite" />
     <Compile Include="Services\Shared\PagedList.of.T.cs" />
     <Content Include="index.sshtml" />
+    <Content Include="Scripts\jquery-2.2.0.min.map" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

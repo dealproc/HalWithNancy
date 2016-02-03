@@ -1,0 +1,38 @@
+﻿<header>
+    <nav class="navbar navbar-inverse" role="navigation">
+        <ul class="nav navbar-nav navbar-right">
+            <li>
+                <a data-bind="visible: router.isNavigating">
+                    <i class="fa fa-fw fa-cog fa-lg fa-spin"></i>
+                    <span>Please Wait...</span>
+                </a>
+            </li>
+            <li class="dropdown dark user-menu">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                    <img width="23" height="23" src="/content/images/avatar.jpg">
+                    <span class="user-name" data-bind=""></span>
+                    <b class="caret"></b>
+                </a>
+                <ul class="dropdown-menu">
+                    <li>
+                        <a href="/auth/signout" target="_top">
+                            <i class="icon-signout"></i>
+                            Sign out
+                        </a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+        <a class="toggle-nav btn navbar-left" href="#">
+            <i class="fa fa-fw fa-bars"></i>
+        </a>
+        <ul class="nav navbar-nav navbar-left" data-bind="foreach: router.navigationModel">
+            <li data-bind="css: { active: isActive }">
+                <a data-bind="attr: {href: hash}">
+                    <span data-bind="text: title"></span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<div data-bind="router: { cacheViews: false }"></div>
