@@ -38,7 +38,7 @@ define(["durandal/system", "durandal/app", "durandal/viewLocator"], function (sy
         router: true,
         dialog: true,
         widget: {
-            kinds: ['grid']
+            kinds: ['dgrid']
         }
     });
 

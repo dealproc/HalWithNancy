@@ -61,10 +61,14 @@
     <Content Include="App\services\artistService.js" />
     <Content Include="App\shell.html" />
     <Content Include="App\shell.js" />
+    <Content Include="App\viewmodels\artistgrid\index.js" />
     <Content Include="App\viewmodels\artists\dashboard.js" />
     <Content Include="App\viewmodels\artists\index.js" />
+    <Content Include="App\views\artistgrid\index.html" />
     <Content Include="App\views\artists\dashboard.html" />
     <Content Include="App\views\artists\index.html" />
+    <Content Include="App\widgets\dgrid\view.html" />
+    <Content Include="App\widgets\dgrid\viewmodel.js" />
     <Content Include="App\widgets\grid\view.html" />
     <Content Include="App\widgets\grid\viewmodel.js" />
     <Content Include="Content\bootstrap-theme.css" />

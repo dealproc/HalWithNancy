@@ -1,0 +1,54 @@
+﻿<table class="table table-condensed">
+    <thead>
+        <tr>
+            <th data-bind="attr: {colspan: columns.length}">
+                <form class="form-inline pull-right">
+                    <div class="form-group">
+                        <label for="keyword">Search</label>
+                        <input type="text" class="form-control" id="keyword" data-bind="value: keywords, valueUpdate: 'keyup'" />
+                    </div>
+                </form>
+            </th>
+        </tr>
+        <tr data-bind="foreach: columns">
+            <th data-bind="attr:{ class: css }"><i data-bind="css: sortIcon, visible: canSort"></i> <a data-bind="text: header, click: function() { $parent.setSort($data); }, clickBubble: false"></a></th>
+        </tr>
+    </thead>
+    <tbody data-bind="foreach: { data: records, as: 'row' }">
+        <tr data-bind="foreach: $parent.columns">
+            <td data-bind="template: { name: $parents[1].colType, data: { col: $data, row: row} }"></td>
+        </tr>
+    </tbody>
+    <tfoot>
+        <tr>
+            <td data-bind="attr: {colspan: columns.length}">
+                <div class="btn-group" data-bind="foreach: pager">
+                    <button type="button" class="btn btn-sm btn-default" data-bind="text: title, enable: enabled, click: function(){ $parent.onPageChange($data); }"></button>
+                </div>
+                <div class="pull-right">
+                    Page
+                    <span data-bind="text: pageNumber"></span>
+                    of
+                    <span data-bind="text: totalPages"></span>
+                    (Total Records: <span data-bind="text: totalRecords"></span>)
+                </div>
+            </td>
+        </tr>
+    </tfoot>
+</table>
+
+<script type="text/html" id="text">
+    <span data-bind="text: $data.row[$data.col.property]"></span>
+</script>
+<script type="text/html" id="buttons">
+    <div class="btn-group btn-group-sm">
+        <a class="btn btn-default" data-bind="attr: { href: '#' + $data.row._links.self.href }">Edit</a>
+        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <span class="caret"></span>
+            <span class="sr-only">Toggle Dropdown</span>
+        </button>
+        <ul class="dropdown-menu" data-bind="foreachprop: $data.row._links">
+            <li><a data-bind="attr: { href: '#' + value.href }, text: value.href"></a></li>
+        </ul>
+    </div>
+</script>
