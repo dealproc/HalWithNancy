@@ -15,13 +15,13 @@
                 });
             }).promise();
         },
-        getPage: function (page, pageSize) {
+        getPage: function (queryString) {
             return system.defer(function (dfd) {
                 $.ajax({
                     headers: {
                         "Accept": "application/hal+json",
                     },
-                    data: { page: page, pageSize: pageSize },
+                    data: $.param(queryString),
                     dataType: "json",
                     cache: false,
                     url: "/artists"

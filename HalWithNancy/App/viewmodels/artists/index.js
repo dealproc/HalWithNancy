@@ -3,11 +3,32 @@
         var _this = this;
 
         _this.activate = function (params) {
+
             if (params !== undefined) {
-                artistService.getPage(params.page, params.pageSize).done(_this.grid.bindPage);
-            } else {
-                artistService.getPage(1, ko.utils.unwrapObservable(_this.grid.pageSize)).done(_this.grid.bindPage);
-            }
+                _this.grid.pageNumber(params.page || 1);
+                _this.grid.pageSize(params.pageSize || 10);
+                _this.grid.keywords(params.keywords || '');
+
+                if (params.sortBy !== undefined && params.sortByDir !== undefined) {
+                    var properties = params.sortBy.split(',');
+                    var directions = params.sortByDir.split(',');
+
+                    for (var i = 0; i < properties.length; i++) {
+                        var property = properties[i];
+                        var direction = directions[i];
+
+                        for (var idx = 0; idx < _this.grid.columns.length; idx++) {
+                            var col = _this.grid.columns[idx];
+                            if (col.property === property) {
+                                col.sort(direction === 'asc');
+                                idx = _this.grid.columns.length;
+                            }
+                        }
+                    }
+                }
+            };
+
+            artistService.getPage(_this.grid.gridParameters()).done(_this.grid.bindPage);
         };
 
         _this.grid = {
@@ -19,7 +40,44 @@
             totalPages: ko.observable(0),
             totalRecords: ko.observable(0),
             pager: ko.observableArray([]),
-            edit: function(btn){
+            keywords: ko.observable(''),
+            gridParameters: function () {
+                var parameters = {};
+
+                if (ko.utils.unwrapObservable(this.pageNumber) !== undefined) {
+                    parameters['page'] = ko.utils.unwrapObservable(this.pageNumber);
+                }
+                if (ko.utils.unwrapObservable(this.pageSize) !== undefined) {
+                    parameters['pageSize'] = ko.utils.unwrapObservable(this.pageSize);
+                }
+                var keywords = ko.utils.unwrapObservable(this.keywords);
+                if (keywords !== undefined && keywords !== '' && keywords !== null) {
+                    parameters['keywords'] = keywords;
+                }
+
+                var sortByCols = [];
+                var sortByDir = [];
+
+                for (var i = 0; i < this.columns.length; i++) {
+                    var col = this.columns[i];
+                    var canSort = ko.utils.unwrapObservable(col.canSort);
+                    var sort = ko.utils.unwrapObservable(col.sort);
+                    var property = ko.utils.unwrapObservable(col.property);
+
+                    if (canSort && (sort !== undefined && sort !== null)) {
+                        sortByCols.push(property);
+                        sortByDir.push(sort ? 'asc' : 'desc');
+                    }
+                }
+
+                if (sortByCols.length) {
+                    parameters['sortBy'] = sortByCols.toString();
+                    parameters['sortByDir'] = sortByDir.toString();
+                }
+
+                return parameters;
+            },
+            edit: function (btn) {
                 alert(btn.href);
             },
             loadPage: function (btn) {
@@ -41,7 +99,7 @@
                 _this.grid.data([]);
                 _this.grid.data(data._embedded.artists);
 
-                router.navigate('?page=' + _this.grid.pageNumber() + '&pageSize=' + _this.grid.pageSize(), false);
+                router.navigate("?" + $.param(_this.grid.gridParameters()), false);
             },
             colType: function (cell) {
                 if (cell.col.controls !== undefined) {
@@ -62,7 +120,9 @@
                     col.sort(undefined);
                 }
 
-                artistService.getPage(1, ko.utils.unwrapObservable(_this.grid.pageSize)).done(_this.grid.bindPage);
+                _this.grid.pageNumber(1);
+
+                artistService.getPage(_this.grid.gridParameters()).done(_this.grid.bindPage);
             },
             columns: [
                 { header: '', property: 'hi', controls: 'buttons', css: 'col-sm-2 col-md-1', sort: ko.observable(undefined), canSort: false },
