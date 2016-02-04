@@ -23,11 +23,11 @@ namespace HalWithNancy.Repositories.SqliteRepositories {
 			using (var cn = new SQLite.SQLiteConnection(_dbConnectionString)) {
 				var query = cn.Table<Artist>().AsQueryable();
 
-				var totalRecords = query.Count();
-
 				if (criteria.Keywords.Any()) {
 					criteria.Keywords.ToList().ForEach(word => query = query.Where(a => a.Name.ToLower().Contains(word.ToLower())));
 				}
+
+				var totalRecords = query.Count();
 
 				if (criteria.SortBy.Any()) {
 					foreach (var kvp in criteria.SortBy) {
