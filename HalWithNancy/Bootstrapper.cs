@@ -22,6 +22,8 @@ namespace HalWithNancy {
 			base.ConfigureApplicationContainer(container);
 
 			container.Register(typeof(IProvideHalTypeConfiguration), HypermediaConfiguration());
+
+			container.Register<Repositories.IRepositoryProjection<DataModels.Album>, Repositories.SqliteRepositories.AlbumRepository>();
 		}
 
 		private static HalConfiguration HypermediaConfiguration() {
@@ -43,6 +45,24 @@ namespace HalWithNancy {
 					(model, ctx) => HomeModule.GetArtistsPaged.CreateLink("next", new { page = model.PageNumber + 1, pageSize = model.PageSize, keywords = string.Join(",", model.Keywords), sortBy = string.Join(",", model.SortedBy.Select(kvp => kvp.Key)), sortByDir = string.Join(",", model.SortedBy.Select(kvp => kvp.Value == ListSortDirection.Ascending ? "asc" : "desc")) }),
 					(model, ctx) => model.PageNumber < model.TotalPages
 				);
+
+			config.For<Services.Album.AlbumPmo>()
+				.Links(model => HomeModule.GetAlbums.CreateLink(model));
+
+			config.For<PagedList<Services.Album.AlbumPmo>>()
+				.Embeds("albums", (x) => x.Data)
+				.Links(
+					(model, ctx) => HomeModule.GetAlbumsPaged.CreateLink("self", new { page = model.PageNumber, pageSize = model.PageSize, keywords = string.Join(",", model.Keywords), sortBy = string.Join(",", model.SortedBy.Select(kvp => kvp.Key).ToArray()), sortByDir = string.Join(",", model.SortedBy.Select(kvp => kvp.Value == ListSortDirection.Ascending ? "asc" : "desc")) })
+				)
+				.Links(
+					(model, ctx) => HomeModule.GetAlbumsPaged.CreateLink("prev", new { page = model.PageNumber - 1, pageSize = model.PageSize, keywords = string.Join(",", model.Keywords), sortBy = string.Join(",", model.SortedBy.Select(kvp => kvp.Key)), sortByDir = string.Join(",", model.SortedBy.Select(kvp => kvp.Value == ListSortDirection.Ascending ? "asc" : "desc")) }),
+					(model, ctx) => model.PageNumber > 1
+				)
+				.Links(
+					(model, ctx) => HomeModule.GetAlbumsPaged.CreateLink("next", new { page = model.PageNumber + 1, pageSize = model.PageSize, keywords = string.Join(",", model.Keywords), sortBy = string.Join(",", model.SortedBy.Select(kvp => kvp.Key)), sortByDir = string.Join(",", model.SortedBy.Select(kvp => kvp.Value == ListSortDirection.Ascending ? "asc" : "desc")) }),
+					(model, ctx) => model.PageNumber < model.TotalPages
+				);
+
 
 			return config;
 		}

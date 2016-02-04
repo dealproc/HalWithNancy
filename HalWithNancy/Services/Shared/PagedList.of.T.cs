@@ -6,6 +6,7 @@ namespace HalWithNancy.Services.Shared {
 		long PageNumber { get; }
 		long PageSize { get; }
 		long TotalResults { get; }
+		long TotalPages { get; }
 		string Keywords { get; }
 		IDictionary<string, ListSortDirection> SortedBy { get; }
 		IEnumerable<T> Data { get; }

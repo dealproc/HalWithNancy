@@ -1,9 +1,10 @@
-﻿define(["durandal/system", "durandal/app", "plugins/router", "jquery", "knockout", "services/artistService"], function (system, app, router, $, ko, artistService) {
+﻿define(["durandal/system", "durandal/app", "plugins/router", "jquery", "knockout", "services/albumService"], function (system, app, router, $, ko, albumService) {
     var ctor = function () {
         var _this = this;
 
         _this.grid = {
-            dataService: artistService,
+            collectionName: 'albums',
+            dataService: albumService,
             pageNumber: 1,
             pageSize: 10,
             keywords: '',
@@ -12,7 +13,8 @@
             records: [],
             columns: [
                 { header: '', property: 'hi', controls: 'buttons', css: 'col-sm-2 col-md-1', sort: ko.observable(undefined), canSort: false },
-                { header: 'Artist Name', property: 'name', css: 'col-sm-10 col-md-11', sort: ko.observable(undefined), canSort: true }
+                { header: 'Artist Name', property: 'artist',       css: 'col-sm-5 col-md-5', sort: ko.observable(undefined), canSort: true },
+                { header: 'Album Name', property: 'title',         css: 'col-sm-5 col-md-6', sort: ko.observable(undefined), canSort: true },
             ]
         };
 

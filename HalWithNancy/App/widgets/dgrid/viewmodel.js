@@ -39,11 +39,15 @@
 
     var dgrid = function (config) {
         if (config.dataService === undefined) {
-            throw new Error("Data service must be provided.");
+            throw new Error("Data service must be provided!");
+        }
+        if (config.collectionName === undefined) {
+            throw new Error("HAL embedded collection name was not provided!");
         }
         var grid = this;
 
         grid.dataService = config.dataService;
+        grid.collectionName = config.collectionName;
 
         grid.columns = normalizeColumns(config.columns);
 
@@ -150,7 +154,7 @@
             ko.utils.arrayPushAll(grid.pager, btns);
 
             grid.records([]);
-            grid.records(data._embedded.artists);
+            grid.records(data._embedded[grid.collectionName]);
 
             var instruction = router.activeInstruction();
             console.log(instruction);

@@ -58,19 +58,18 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="App\main.js" />
+    <Content Include="App\services\albumService.js" />
     <Content Include="App\services\artistService.js" />
     <Content Include="App\shell.html" />
     <Content Include="App\shell.js" />
-    <Content Include="App\viewmodels\artistgrid\index.js" />
-    <Content Include="App\viewmodels\artists\dashboard.js" />
+    <Content Include="App\viewmodels\albums\index.js" />
     <Content Include="App\viewmodels\artists\index.js" />
-    <Content Include="App\views\artistgrid\index.html" />
-    <Content Include="App\views\artists\dashboard.html" />
+    <Content Include="App\viewmodels\artists\dashboard.js" />
+    <Content Include="App\views\albums\index.html" />
     <Content Include="App\views\artists\index.html" />
+    <Content Include="App\views\artists\dashboard.html" />
     <Content Include="App\widgets\dgrid\view.html" />
     <Content Include="App\widgets\dgrid\viewmodel.js" />
-    <Content Include="App\widgets\grid\view.html" />
-    <Content Include="App\widgets\grid\viewmodel.js" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -129,15 +128,21 @@
   <ItemGroup>
     <Compile Include="Bootstrapper.cs" />
     <Compile Include="DataModels\Entities.cs" />
+    <Compile Include="Extensions\EnumerableExtensions.cs" />
     <Compile Include="HomeModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\Criteria.of.T.cs" />
     <Compile Include="Repositories\IRepository.cs" />
     <Compile Include="Repositories\Page.of.T.cs" />
+    <Compile Include="Repositories\SqliteRepositories\AlbumRepository.cs" />
     <Compile Include="Repositories\SqliteRepositories\ArtistRepository.cs" />
+    <Compile Include="Services\Album\AlbumPagedCriteria.cs" />
+    <Compile Include="Services\Album\AlbumPmo.cs" />
+    <Compile Include="Services\Album\AlbumService.cs" />
     <Compile Include="Services\Artists\ArtistPagedCriteria.cs" />
     <Compile Include="Services\Artists\ArtistPmo.cs" />
     <Compile Include="Services\Artists\ArtistService.cs" />
+    <Compile Include="Services\IAlbumService.cs" />
     <Compile Include="Services\IArtistService.cs" />
     <Compile Include="Services\Shared\PagedCriteria.of.T.cs" />
     <Compile Include="SQLite.cs" />

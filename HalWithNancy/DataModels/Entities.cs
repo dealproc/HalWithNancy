@@ -9,6 +9,8 @@ namespace HalWithNancy.DataModels {
 	}
 
 	public class Album : DataModelBase {
+		[SQLite.PrimaryKey(), SQLite.Column("AlbumId")]
+		public override int Id { get; set; }
 		public string Title { get; set; }
 		public int ArtistId { get; set; }
 	}
