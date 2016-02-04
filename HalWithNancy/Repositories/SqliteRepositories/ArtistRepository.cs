@@ -26,7 +26,7 @@ namespace HalWithNancy.Repositories.SqliteRepositories {
 				var totalRecords = query.Count();
 
 				if (criteria.Keywords.Any()) {
-					criteria.Keywords.ToList().ForEach(word => query.Where(a => a.Name.Contains(word)));
+					criteria.Keywords.ToList().ForEach(word => query = query.Where(a => a.Name.ToLower().Contains(word.ToLower())));
 				}
 
 				if (criteria.SortBy.Any()) {

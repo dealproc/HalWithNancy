@@ -28,6 +28,14 @@
                 }
             };
 
+            _this.grid.keywords
+                .extend({
+                    rateLimit: { timeout: 500, method: "notifyWhenChangesStop" }
+                })
+                .subscribe(function () {
+                    artistService.getPage(_this.grid.gridParameters()).done(_this.grid.bindPage);
+                });
+
             artistService.getPage(_this.grid.gridParameters()).done(_this.grid.bindPage);
         };
 

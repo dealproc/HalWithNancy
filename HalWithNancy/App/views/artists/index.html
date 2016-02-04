@@ -1,6 +1,16 @@
 ﻿<h2>Artists</h2>
 <table class="table table-condensed" data-bind="with: grid">
     <thead>
+        <tr>
+            <th data-bind="attr: {colspan: columns.length}">
+                <form class="form-inline pull-right">
+                    <div class="form-group">
+                        <label for="keyword">Search</label>
+                        <input type="text" class="form-control" id="keyword" data-bind="value: keywords, valueUpdate: 'keyup'" />
+                    </div>
+                </form>
+            </th>
+        </tr>
         <tr data-bind="foreach: columns">
             <th data-bind="attr:{ class: css }"><i data-bind="css: sortIcon, visible: canSort"></i> <a data-bind="text: header, click: function() { $parent.setSort($data); }, clickBubble: false"></a></th>
         </tr>
